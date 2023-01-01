@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Send Data to Yourself</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+  <!-- Include Bootstrap CSS -->
+  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" >
+</head>
+
+<body>
+  <!-- Add a Bootstrap container element -->
+  <div class="container mt-5 ">
+  <h1 class="text-success text-center mt-5 animated fadeInLeft">Send Data to Yourself</h1>
+  
+  <label><b>Enter your Group id:</b><input type="text" id="id" class="form-control " placeholder="Group ID" value="-870561979"></label>
+  
+  
+    <h1>Send Text</h1>
+    <textarea id="text" class="form-control" rows="3" oninput="displayLength()" ></textarea>
+	<div id="length"></div>
+    <button onclick="sendtext()" class="btn btn-success mt-5 animated fadeIn zoomIn">Send Text</button> <h5 class="" id="result1" ></h5>
+    <hr>
+	
+    <h1>Send Photo</h1>
+    <input type="file" id="fileInput" class="form-control" multiple>
+    <button onclick="sendphoto()" class="btn btn-success mt-5 animated fadeIn zoomIn">Send Photo </button><h5 class="" id="result2" ></h5>
+    <hr>
+	
+	<h1>Send Video</h1>
+    <input type="file" id="videofileInput" class="form-control" multiple>
+    <button onclick="sendvideo()" class="btn btn-success mt-5 animated fadeIn zoomIn">Send Video </button><h5 class="" id="result3" ></h5>
+    <hr>
+	
+    <h1>Send Document</h1>
+    <input type="file" id="docfileInput" class="form-control" multiple>
+    <button onclick="senddoc()" class="btn btn-success mt-5 animated fadeIn zoomIn">Send Doc </button><h5 class="" id="result4" ></h5>
+   <hr>
+   
+   <h4>node:</h4>
+<div class="font-size-sm">
+  If you will use in personaly... follow the below steps.
+  <ol>
+    <li>Goto to telegram.</li>
+    <li>Create a Group.</li>
+    <li>Add <strong>AFPLUAAS</strong> Bot in your Group.</li>
+    <li>
+      <details>
+        <summary>Get Group Chat_id.</summary>
+        <img src="https://i.ibb.co/JR4PfXG/Picsart-23-01-01-10-47-35-382.jpg">
+        <p>Example Group Caht_id : -673775635</p>
+      </details>
+    </li>
+  </ol>
+</div>
+<footer class="bg-dark text-white py-3 mt-5">
+  <div class="container">
+    <h5 class="text-center mb-0">Created by Dayanidi</h5>
+  </div>
+</footer>
+
+
+  </div>
+
+  <script>
+  
+  function displayLength() {
+    const textarea = document.getElementById('text');
+    const length = document.getElementById('length');
+    
+	if(textarea.value.length <=4096)
+	{
+	length.innerHTML = `Maximum characters 4096 >= ${textarea.value.length} characters`;
+	length.className="text-success";
+	}
+	else{
+	length.innerHTML = `Maximum characters 4096 >= ${textarea.value.length} characters`;
+	length.className="text-danger";
+	}
+  }
+ /* 
+ 
+ onkeydown="handleEnterKey(event)"
+  function handleEnterKey(event) {
+    // Check if the key pressed is the enter key
+    if (event.key === 'Enter') {
+      // Call your function here
+      sendtext();
+    }
+  }
+ */ 
+ function sendtext() {
+  const text = document.getElementById('text');
+  console.log(typeof text.value);
+  const id = document.getElementById('id');
+  const result = document.getElementById('result1');
+  if (!text.value) {
+    alert('text not found');
+    return;
+  }
+  // Encode the string using encodeURIComponent()
+  const encodedText = encodeURIComponent(text.value);
+  fetch('https://api.telegram.org/bot5584328065:AAHIM8QNc8cU_0ktfj8li9V6TfPXc6xeEt8/sendMessage?chat_id='+id.value+'&text='+encodedText)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      if(data.ok == true) {
+        text.value="";
+        result.className="text-success";
+        result.innerHTML='Text send Successfully...';
+        console.log(data);
+      } else {
+        result.innerHTML=data.description;
+        result.className="text-danger";
+      }
+    })
+}
+
+function sendphoto() {
+  // Get the file input element and the progress bar element
+  const fileInput = document.getElementById('fileInput');
+  //const progressBar = document.getElementById('progressBar1');
+  const id = document.getElementById('id');
+  const result = document.getElementById('result2');
+  
+  // Check if any files have been selected
+  if (!fileInput.files || !fileInput.files.length) {
+    alert('Please select one or more files');
+    return;
+  }
+  // Create a new FormData object
+  const formData = new FormData();
+  // Loop through the selected files
+  for (let i = 0; i < fileInput.files.length; i++) {
+    // Add each file to the FormData object
+    formData.append('photo', fileInput.files[i]);
+	fetch('https://api.telegram.org/bot5584328065:AAHIM8QNc8cU_0ktfj8li9V6TfPXc6xeEt8/sendPhoto?chat_id='+id.value+'&caption=', {
+    method: 'POST',
+    body: formData,
+    
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+	  if(data.ok == false)
+	  {
+	  result.innerHTML=data.description;
+	  result.className="text-danger";
+	  }
+	  else{
+	  result.className="text-success";
+	  result.innerHTML='Photos '+(i+1)+' Upload successfully';
+	  }
+    })
+	formData.delete('photo');
+  }
+  fileInput.value = "";
+}
+
+function sendvideo() {
+	// Get the file input element
+const fileInput = document.getElementById('videofileInput');
+//const progressBar = document.getElementById('progressBar2');
+const id = document.getElementById('id');
+const result = document.getElementById('result3');
+// Check if any files have been selected
+if (!fileInput.files || !fileInput.files.length) {
+  alert('Please select a file');
+  return;
+}
+// Create a new FormData object
+const formData = new FormData();
+// Add the video file to the FormData object
+  for (let i = 0; i < fileInput.files.length; i++) {
+formData.append('video', fileInput.files[i]);
+// Send the video to the server using a POST request
+fetch('https://api.telegram.org/bot5584328065:AAHIM8QNc8cU_0ktfj8li9V6TfPXc6xeEt8/sendVideo?chat_id='+id.value+'&caption=', {
+  method: 'POST',
+  body: formData,
+   
+})
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+	if(data.ok == false)
+	{
+	result.innerHTML=data.description;
+	  result.className="text-danger";
+	}
+	else{
+	result.className="text-success";
+	  result.innerHTML='Video '+(i+1)+'successfully Uploaded';
+	}
+  });
+
+  formData.delete('video');
+  
+}
+
+fileInput.value = "";
+}
+
+ function senddoc() {
+  // Get the file input element
+  const fileInput = document.getElementById('docfileInput');
+  const id = document.getElementById('id');
+  const result = document.getElementById('result4');
+  // Check if any files have been selected
+  if (!fileInput.files || !fileInput.files.length) {
+    alert('Please select one or more files');
+    return;
+  }
+  // Create a new FormData object
+  const formData = new FormData();
+  // Loop through the selected files
+  for (let i = 0; i < fileInput.files.length; i++) {
+    // Add each file to the FormData object
+    formData.append('document', fileInput.files[i]);
+	fetch('https://api.telegram.org/bot5584328065:AAHIM8QNc8cU_0ktfj8li9V6TfPXc6xeEt8/sendDocument?chat_id='+id.value+'&caption=', {
+    method: 'POST',
+    body: formData,
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+	  if(data.ok == false)
+	  {
+	  result.innerHTML=data.description;
+	  result.className="text-danger";
+	  }
+	  else{
+	  result.className="text-success";
+	  result.innerHTML='Document'+(i+1)+' successfully submitted';
+	  }
+    })
+	formData.delete('document');
+  }
+fileInput.value = "";
+}
+  
+  
+  </script>
+</body>
+</html>
