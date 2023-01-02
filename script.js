@@ -35,7 +35,7 @@
   }
   // Encode the string using encodeURIComponent()
   const encodedText = encodeURIComponent(text.value);
-  fetch('https://api.telegram.org/bot5830822420:AAGjcjWgQcElsZgt0bz SwB5AohPZt4AuegW/sendMessage?chat_id='+id.value+'&text='+encodedText)
+  fetch('https://api.telegram.org/bot5830822420:AAGjcjWgQcElsZgt0bzSwB5AohPZt4Auegw/sendMessage?chat_id='+id.value+'&text='+encodedText)
     .then(response => response.json())
     .then(data => {
       console.log(data);
@@ -69,7 +69,7 @@ function sendphoto() {
   for (let i = 0; i < fileInput.files.length; i++) {
     // Add each file to the FormData object
     formData.append('photo', fileInput.files[i]);
-	fetch('https://api.telegram.org/bot5830822420:AAGjcjWgQcElsZgt0bz SwB5AohPZt4AuegW/sendPhoto?chat_id='+id.value+'&caption=', {
+	fetch('https://api.telegram.org/bot5830822420:AAGjcjWgQcElsZgt0bzSwB5AohPZt4Auegw/sendPhoto?chat_id='+id.value+'&caption=', {
     method: 'POST',
     body: formData,
     
@@ -109,7 +109,7 @@ const formData = new FormData();
   for (let i = 0; i < fileInput.files.length; i++) {
 formData.append('video', fileInput.files[i]);
 // Send the video to the server using a POST request
-fetch('https://api.telegram.org/bot5830822420:AAGjcjWgQcElsZgt0bz SwB5AohPZt4AuegW/sendVideo?chat_id='+id.value+'&caption=', {
+fetch('https://api.telegram.org/bot5830822420:AAGjcjWgQcElsZgt0bzSwB5AohPZt4Auegw/sendVideo?chat_id='+id.value+'&caption=', {
   method: 'POST',
   body: formData,
    
@@ -151,7 +151,7 @@ fileInput.value = "";
   for (let i = 0; i < fileInput.files.length; i++) {
     // Add each file to the FormData object
     formData.append('document', fileInput.files[i]);
-	fetch('https://api.telegram.org/bot5830822420:AAGjcjWgQcElsZgt0bz SwB5AohPZt4AuegW/sendDocument?chat_id='+id.value+'&caption=', {
+	fetch('https://api.telegram.org/bot5830822420:AAGjcjWgQcElsZgt0bzSwB5AohPZt4Auegw/sendDocument?chat_id='+id.value+'&caption=', {
     method: 'POST',
     body: formData,
   })
