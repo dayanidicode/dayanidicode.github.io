@@ -13,8 +13,17 @@
   <!-- Add a Bootstrap container element -->
   <div class="container mt-5 ">
   <h1 class="text-success text-center mt-5 animated fadeInLeft">Send Data to Yourself</h1>
+  <div id="hide1" style="display:;" >
   
-  <label><b>Enter your Group id:</b><input type="text" id="id" class="form-control " placeholder="Group ID" value="1221832086"></label>
+  <input type="text" id="name" class="form-control text-center font-size-xl mr-5 " placeholder="Telegram profile name" value="" style="font-size:50px;border-color:green;color:green;margin-top:95px;" onkeydown="handleEnterKey(event)"  spellcheck="false" max-width="690px">
+  <p id="available" style="margin-bottom:90px;">node: only Enter profile FirstName.</p>
+  
+  
+  </div>
+  <div id="hide2" style="display:none;" >
+  
+  
+  
   
   
     <h1>Send Text</h1>
@@ -37,21 +46,14 @@
     <input type="file" id="docfileInput" class="form-control" multiple>
     <button onclick="senddoc()" class="btn btn-success mt-5 animated fadeIn zoomIn">Send Doc </button><h5 class="" id="result4" ></h5>
    <hr>
-   
+   </div>
    <h4>node:</h4>
 <div class="font-size-sm">
-  If you will use in personaly... follow the below steps.
+  If your name is not available pleace follow the below steps.
   <ol>
-    <li>Goto to telegram.</li>
-    <li>Create a Group.</li>
-    <li>Add <strong>AFPLUAAS</strong> Bot in your Group.</li>
-    <li>
-      <details>
-        <summary>Click me ...Get Group Chat_id.</summary>
-        <img src="https://i.ibb.co/JR4PfXG/Picsart-23-01-01-10-47-35-382.jpg">
-        <p>Example Group Caht_id : -673775635</p>
-      </details>
-    </li>
+    <li>Goto telegram.</li>
+    <li>Search <strong>@send_data_to_yourselfbot</strong> in your telegram app.</li>
+    <li>Get <strong>/start</strong> the Bot.</li>
   </ol>
 </div>
 <footer class="bg-dark text-white py-3 mt-5">
@@ -64,6 +66,5 @@
   </div>
 
   <script type="text/javascript" src="script.js"></script>
-
 </body>
 </html>
