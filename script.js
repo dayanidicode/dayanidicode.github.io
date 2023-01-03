@@ -94,7 +94,7 @@ xhr.onload = function() {
 		chatid.style.color="green";
 		chatid.style.borderColor="green";
 		checked.style.color="black";
-		checked.innerHTML="node: only Enter profile FirstName.";
+		checked.innerHTML="note: only Enter profile FirstName.";
 	}
 }
 
@@ -142,7 +142,7 @@ function checkID(){
       if(data.ok == true) {
         text.value="";
         result.className="text-success";
-        result.innerHTML='Text send Successfully...';
+        result.innerHTML='Text send Successfully.';
         console.log(data);
       } else {
         result.innerHTML=data.description;
