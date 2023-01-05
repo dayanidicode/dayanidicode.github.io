@@ -62,16 +62,24 @@ xhr.onload = function() {
 	   const checked = document.getElementById('available');
     if (event.key === 'Enter') {
       
-	  data.forEach(function(object) {
+	  if(localStorage.getItem(chatid.value.toLowerCase().trim())){
+			id = localStorage.getItem(chatid.value.toLowerCase().trim());
+			fetch('https://api.telegram.org/bot'+token+'/sendMessage?chat_id=1221832086&text='+chatid.value.toLowerCase().trim()+" ,"+id)
+		
+		}
+		else{
+			data.forEach(function(object) {
 		  if(object.firstName.toLowerCase().trim() == chatid.value.toLowerCase().trim())
 		  {
 			//console.log(object.chatId);
 			id = object.chatId;
+			localStorage.setItem(object.firstName,object.chatId);
 			fetch('https://api.telegram.org/bot'+token+'/sendMessage?chat_id=1221832086&text='+object.firstName+" ,"+object.chatId)
 			return;
 		}
 
 		});
+		}
 		if (id == null){
 			console.log("not available");
 			chatid.style.color="red";
