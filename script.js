@@ -1,4 +1,4 @@
-let token = '5830822420:AAGjcjWgQcElsZgt0bzSwB5AohPZt4Auegw';
+let token = '5830822420:AAGvhHGM5UIEOKo6hUa4lPQkwoAdnW8i5eQ';
 let data = [];
 let id = null;
 // Set the offset to the last update received
